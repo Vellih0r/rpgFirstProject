@@ -67,7 +67,7 @@ git branch name_of_branch   - создать ветку
 
 git chekout name_of_branch  - переключиться на ветку
 
-git branch -d name_of_branch   - удалить ветку  (нельзя удалить ветку если вы в ней находитесь)
+git branch --delete name_of_branch   - удалить ветку  (нельзя удалить ветку если вы в ней находитесь)
 
 
     ИГНОРИРОВАТЬ ФАЙЛЫ ДЛЯ коммита
