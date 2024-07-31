@@ -2,8 +2,9 @@
 class Player:
     def __init__(self, name):
 
-        #init player stats and inventory
+        #added init player stats and inventory; by misha
         self.name = name
+        self.balance = 0 # added new var.; by artyom
 
         self.health = 100
         self.armor = 0
@@ -11,29 +12,33 @@ class Player:
         self.mag_damage = 0
         self.crit_chance = 0
 
-        #items which be available
+        #added items which be available; by misha
         self.items = ["Sword", "Shield", "Trinket"]
 
         self.inventory = []
 
 
-    #display stats
+    #added display stats; by misha
     def display_stats(self):
-        print(f''' Hero named {self.name}!
-| Stats:
+        print(f'''
+| Stats {self.name}:
 |
 | Health: {self.health}
 | Armor: {self.armor}
 | Physical damage: {self.phys_damage}
 | Magical damage: {self.mag_damage}
 | Crit chance: {self.crit_chance}
-| 
-|
-| Inventory {self.inventory}
 {"-"*27}''')
+    
+    # added inventory func; by artyom
+    def inv(self):
+        print(f'''{'*' * 35}
+        Your Inventory: 
+        |        {self.inventory}        |
+{'*' * 35}''')
 
 
-    #func to add item from [items] to [inventory]
+    #added func to add item from [items] to [inventory]; by misha
     def add_item(self, item):
         try:
             self.inventory.append(item)
@@ -43,17 +48,17 @@ class Player:
             print("404 item not found")
 
     
-    #if new items added to items[] update states information
-    def update_states(self):
+    #added IF new items added to items[] update states information; by misha
+    def update_stats(self):
         if "Sword" == self.inventory[-1]:
-            phys_damage += 10
-            crit_chance += 5
+            self.phys_damage += 10
+            self.crit_chance += 5
         if "Shield" == self.inventory[-1]:
-            armor += 10
-            health += 10
+            self.armor += 10
+            self.health += 10
         if "Trinket" == self.inventory[-1]:
-            mag_damage += 10
-            crit_chance += 5
+            self.mag_damage += 10
+            self.crit_chance += 5
 
     #creating new player with name Misha
 # Misha = Player("Misha")
