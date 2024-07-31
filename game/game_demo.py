@@ -33,9 +33,14 @@ class Player:
 {"-"*27}''')
 
 
-
+    #func to add item from [items] to [inventory]
     def add_item(self, item):
-        pass
+        try:
+            self.inventory.append(item)
+            self.items.remove(item)
+            print(f"{item} now in inventory")
+        except:
+            print("404 item not found")
 
     
     #if new items added to items[] update states information
@@ -50,8 +55,10 @@ class Player:
             mag_damage += 10
             crit_chance += 5
 
-#creating new player with name Misha
-Misha = Player("Misha")
+    #creating new player with name Misha
+# Misha = Player("Misha")
 
-#display info
-Misha.display_stats()
+    #display info
+# Misha.display_stats()
+# Misha.add_item("Sword")
+# print(Misha.inventory)
