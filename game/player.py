@@ -69,7 +69,7 @@ class Player:
         if "Yes" in fishing_rules:
             print("Правила Рыбалки: \n""У вас 5 попыток чтобы словить рыбку\n""После пятого раза мини-игра прекратиться\n""Вот и все правила:")
         else:
-              print("Хорошей игры!")
+            print("Хорошей игры!")
         
         #START OF FISHING (calling main code while counter is < 5)
         while counter < 5:
