@@ -16,7 +16,7 @@ class Player:
         #added items which be available; by misha
         self.items = ["Клінок", "Щит", "Дрібничка", "Вудочка"]
 
-        self.inventory = ["Вудочка"]
+        self.inventory = []
 
         #added display stats; by misha
     def display_stats(self):
@@ -30,7 +30,7 @@ class Player:
 | Crit chance: {self.crit_chance}
 {"-"*27}''')
     
-    # added inventory func; by artyom
+    # added disp_inventory func; by artyom
     def disp_invent(self):
         print(f'''{'*' * 35}
         Your Inventory: 
@@ -44,8 +44,8 @@ class Player:
             self.inventory.append(item)
             self.items.remove(item)
             print(f"Тепер {item} у тебе в інвентарі")
-        except:
-            print("404 item not found")
+        except BaseException as e:
+            print("404 item not found:", e)
 
     
     #added IF new items added to items[] update states information; by misha

@@ -35,7 +35,7 @@ while True:
         elif action == "Магазин": 
             shop.shopfunc(Hero.name, Hero.balance, Hero.items)
             shop.buy(Hero)
-        elif action == "Інв": Hero.inventory()
+        elif action == "Інв": Hero.disp_invent()
         elif action == "Рибачити": Hero.fishing_process()
         elif action == "Вихід": break
         elif action == "Допомога":
