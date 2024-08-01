@@ -16,7 +16,6 @@ Hero = player.Player(nickname)
 welcomeclass.welcome(Hero.name, Hero.balance)
 
 # добавлено выборковая переменная для определения куда пойдет юзер  И  проверка на ошибки; by artyom
-<<<<<<< HEAD
 try:
     choice = int(input("введіть 1,2 чи 3 щоб обрати...\n"))
     if choice == 1: Hero.display_stats()

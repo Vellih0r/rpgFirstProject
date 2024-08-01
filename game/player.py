@@ -109,6 +109,3 @@ class Player:
             print("Вы словили Карпика :()")
             self.balance += 2
             print(f"На ваш баланс зачислено: {self.balance}")
-
-Hero = Player("Artem")
-Hero.fishing_process()
