@@ -85,27 +85,27 @@ class Player:
     def fishing(self):
         procent = randint(1,100)
         #chance to catch a fish
-        if procent < 6:                                          # 5 %
+        if procent <= 5:                                          # 5 % 12345
             print("Вы словили золотую рыбку!")  
             self.balance += 15
             print(f"На ваш баланс зачислено: {self.balance}")
         
-        if  procent > 5 and procent < 15:                        # 10%
+        if  procent > 5 and procent <= 15:                        # 10% 6
             print("Вы словили Тунца!")
             self.balance += 10
             print(f"На ваш баланс зачислено: {self.balance}")
         
-        if procent > 15 and procent < 35:                        #20%
+        if procent > 15 and procent <= 35:                        #20%
             print("Вы словили Скумбрию!")
             self.balance += 7
             print(f"На ваш баланс зачислено: {self.balance}")
         
-        if procent > 35 and procent < 60:                        # 25%
+        if procent > 35 and procent <= 60:                        # 25%
             print("Вы словили Бычка!")
             self.balance += 5
             print(f"На ваш баланс зачислено: {self.balance}")
         
-        if procent > 60 and procent < 100:                       # 40%       
+        if procent > 60 and procent <= 100:                       # 40%       
             print("Вы словили Карпика :()")
             self.balance += 2
             print(f"На ваш баланс зачислено: {self.balance}")
