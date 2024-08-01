@@ -1,1 +1,15 @@
-# Артём: так получилось что я работал над приветствием в игре, и буду заниматься уже магазином днём 01.08)
+import player
+from welcomeclass import decorator
+
+@decorator
+def shop(nickname, balance, items):
+    for item in items:
+        print(f"{item}\n")
+    print(f'''
+        Вітаємо в магазині, {nickname}!
+      Твій баланс: {balance}
+{items[0]}
+{items[1]}
+{items[2]}
+''')
+    

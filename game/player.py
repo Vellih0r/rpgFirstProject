@@ -59,11 +59,3 @@ class Player:
         if "Trinket" == self.inventory[-1]:
             self.mag_damage += 10
             self.crit_chance += 5
-
-    #creating new player with name Misha
-# Misha = Player("Misha")
-
-    #display info
-# Misha.display_stats()
-# Misha.add_item("Sword")
-# print(Misha.inventory)
