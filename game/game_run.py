@@ -15,42 +15,12 @@ Hero = player.Player(nickname)
 # вызов фукнции 'welcome'
 welcomeclass.welcome(Hero.name, Hero.balance)
 
-# добавлено выборковая переменная для определения куда пойдет юзер  И  проверка на ошибки; by artyom
-<<<<<<< HEAD
-try:
-    choice = int(input("введіть 1,2 чи 3 щоб обрати...\n"))
-    if choice == 1: Hero.display_stats()
-    elif choice == 2: shop.shop(Hero.name, Hero.balance, Hero.items)
-    elif choice == 3: Hero.inv()
-    else:
-        print("Невизначений вибір.")
-except:
-    print("Помилка")
-
-
-
-choice = int(input("введіть 1,2 чи 3 щоб обрати...\n"))
-
-if choice == 1: Hero.display_stats()
-elif choice == 2:
-    shop.shopfunc(Hero.name, Hero.balance, Hero.items)
-    shop.buy(Hero)
-    shop.choice(Hero)
-elif choice == 3: Hero.inv()
-else:
-    print("Невизначений вибір.")
-
-
-
-    
-
-
 
 # нескічненний цикл з грою поки гравец не напише "Вихід"
 while True:
 
     # нехай буде перевірка смерті
-    if Hero.health < 1:
+    if Hero.health <= 0:
         print(f"Ваше здоров'я = {Hero.health}, ви програли")
         break
 
@@ -62,8 +32,10 @@ while True:
     
     try:
         if action == "Стати": Hero.display_stats()
-        elif action == "Магазин": shop.shop(Hero.name, Hero.balance, Hero.items)
-        elif action == "Інвентар": Hero.inv()
+        elif action == "Магазин": 
+            shop.shopfunc(Hero.name, Hero.balance, Hero.items)
+            shop.buy(Hero)
+        elif action == "Інв": Hero.inventory()
         elif action == "Рибачити": Hero.fishing_process()
         elif action == "Вихід": break
         elif action == "Допомога":
@@ -76,8 +48,5 @@ while True:
 | Вихід - вийти з гри''')
         else:
             print("Такої дії неіснує")
-    except:
-        print("Помилка")
-
-
-
+    except BaseException as a:
+        print("Помилка", a)

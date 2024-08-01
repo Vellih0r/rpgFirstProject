@@ -10,12 +10,13 @@ class Player:
         self.armor = 0
         self.phys_damage = 10
         self.mag_damage = 0
+        self.mana_pt = 100
         self.crit_chance = 0
 
         #added items which be available; by misha
-        self.items = ["Клінок", "Щит", "Дрібничка"]
+        self.items = ["Клінок", "Щит", "Дрібничка", "Вудочка"]
 
-        self.inventory = ["fishing_rod"]
+        self.inventory = ["Вудочка"]
 
         #added display stats; by misha
     def display_stats(self):
@@ -30,7 +31,7 @@ class Player:
 {"-"*27}''')
     
     # added inventory func; by artyom
-    def inv(self):
+    def disp_invent(self):
         print(f'''{'*' * 35}
         Your Inventory: 
         |        {self.inventory}        |
@@ -42,7 +43,7 @@ class Player:
         try:
             self.inventory.append(item)
             self.items.remove(item)
-            print(f"{item} now in inventory")
+            print(f"Тепер {item} у тебе в інвентарі")
         except:
             print("404 item not found")
 
@@ -58,57 +59,53 @@ class Player:
         if "Trinket" == self.inventory[-1]:
             self.mag_damage += 10
             self.crit_chance += 5
-        if "fishing_rod" == self.inventory[-1]:
-            print("У вас открылось новое действие 'Рыбалка'")
+        if "Вудочка" == self.inventory[-1]:
+            print("Тепер ви можите рибачити!")
 
 #fishing mechanic
     def fishing_process(self):
         #RULES FOR FISHING
         counter = 0
-        fishing_rules = input("Хотите посмотреть правила игры? Yes/no:  ")
-        if "Yes" in fishing_rules:
-            print("Правила Рыбалки: \n""У вас 5 попыток чтобы словить рыбку\n""После пятого раза мини-игра прекратиться\n""Вот и все правила:")
+        fishing_rules = input("Хочите подивитися привали гри? Так/ні:  ")
+
+        if "Так" in fishing_rules:
+            print("Правила рибалки: \n""У вас є 5 спроб поки вудочка не зламалася\n", "Після пятої спроби міні-гра закінчиться\n", "Ось і всіправила:")
         else:
-            print("Хорошей игры!")
+            print("Гарної гри!")
         
         #START OF FISHING (calling main code while counter is < 5)
-        while counter < 5:
+        while counter < 5 and ("Вудочка") in self.inventory:
           
-            start = input("Чтобы закинуть удочку нажмите кнопку 2: ")
-            if "2" in start and counter < 5:
+            start = input("Щоб закинути вудочку натисніть 2: ")
+            if "2" in start:
                 counter += 1
                 self.fishing()
         else:
-            print(f"Ваши 5 попыток оконченны.На вашем балансе теперь: {self.balance} голды \n""ПРОИСХОДИТ ВЫХОД")
+            print(f"Вудочка зламалася(або її немає)!. На вашому рахунку: {self.balance} голди \n", "*Ви пішли від озера*")
+            if "Вудочка" in self.inventory: self.inventory.remove("Вудочка")
 
     #MAIN FISHING CODE
     def fishing(self):
         procent = randint(1,100)
         #chance to catch a fish
         if procent <= 5:                                          # 5 % 
-            print("Вы словили золотую рыбку!")  
+            print("Ви зловили золоту рибку!")  
             self.balance += 15
-            print(f"На ваш баланс зачислено: {self.balance}")
+            
         
-        if  procent > 5 and procent <= 15:                        # 10% 
-            print("Вы словили Тунца!")
+        elif  procent <= 15:                        # 10% 
+            print("Ви зловили Тунця!")
             self.balance += 10
-            print(f"На ваш баланс зачислено: {self.balance}")
         
-        if procent > 15 and procent <= 35:                        #20%
-            print("Вы словили Скумбрию!")
+        elif procent <= 35:                        #20%
+            print("Ви зловили Скумбрію!")
             self.balance += 7
-            print(f"На ваш баланс зачислено: {self.balance}")
         
-        if procent > 35 and procent <= 60:                        # 25%
-            print("Вы словили Бычка!")
+        elif procent <= 60:                        # 25%
+            print("Ви зловили Бичка!")
             self.balance += 5
-            print(f"На ваш баланс зачислено: {self.balance}")
         
-        if procent > 60 and procent <= 100:                       # 40%       
-            print("Вы словили Карпика :()")
+        elif procent <= 100:                       # 40%       
+            print("Ви зловили Карпіка :()")
             self.balance += 2
-            print(f"На ваш баланс зачислено: {self.balance}")
-
-Hero = Player("Artem")
-Hero.fishing_process()
+        print(f"На ваш рахунок зараховано: {self.balance}")
