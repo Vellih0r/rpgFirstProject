@@ -13,7 +13,7 @@ class Player:
         self.crit_chance = 0
 
         #added items which be available; by misha
-        self.items = ["Sword", "Shield", "Trinket"]
+        self.items = ["Клінок", "Щит", "Дрібничка"]
 
         self.inventory = ["fishing_rod"]
 

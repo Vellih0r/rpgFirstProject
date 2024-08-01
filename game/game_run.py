@@ -16,6 +16,7 @@ Hero = player.Player(nickname)
 welcomeclass.welcome(Hero.name, Hero.balance)
 
 # добавлено выборковая переменная для определения куда пойдет юзер  И  проверка на ошибки; by artyom
+<<<<<<< HEAD
 try:
     choice = int(input("введіть 1,2 чи 3 щоб обрати...\n"))
     if choice == 1: Hero.display_stats()
@@ -28,10 +29,20 @@ except:
 
 
 
+choice = int(input("введіть 1,2 чи 3 щоб обрати...\n"))
+
+if choice == 1: Hero.display_stats()
+elif choice == 2:
+    shop.shopfunc(Hero.name, Hero.balance, Hero.items)
+    shop.buy(Hero)
+    shop.choice(Hero)
+elif choice == 3: Hero.inv()
+else:
+    print("Невизначений вибір.")
+
+
 
     
-
-
 
 
 
@@ -53,7 +64,7 @@ while True:
         if action == "Стати": Hero.display_stats()
         elif action == "Магазин": shop.shop(Hero.name, Hero.balance, Hero.items)
         elif action == "Інвентар": Hero.inv()
-        elif action == "Рибачити": Hero.fishing()
+        elif action == "Рибачити": Hero.fishing_process()
         elif action == "Вихід": break
         elif action == "Допомога":
             print('''Список дій:
@@ -67,3 +78,6 @@ while True:
             print("Такої дії неіснує")
     except:
         print("Помилка")
+
+
+
