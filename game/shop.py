@@ -1,9 +1,6 @@
-import player
 from random import randint
 import welcomeclass
 from welcomeclass import decorator
-
-
 
 
 # привітати в магазині та рандомно розрахувати ціну у словник
@@ -38,7 +35,7 @@ def buy(character):
             character.balance -= dict['Клінок']
             print("Ви купували Клінок!")
             character.add_item('Клінок')
-            character.update_stats()
+            character.update_stats("new")
             back = input("Щоб повернутись назад, натисніть Enter\n")
     elif buying == 'Щит':
         if character.balance <  dict['Щит']:  
@@ -48,7 +45,7 @@ def buy(character):
             character.balance -=  dict['Щит']
             print("Ви купували Щит!")
             character.add_item('Щит')
-            character.update_stats()
+            character.update_stats("new")
             back = input("Щоб повернутись назад, натисніть ENTER\n")
     elif buying == 'Дрібничка':
         if character.balance < dict['Дрібничка']: 
@@ -58,7 +55,7 @@ def buy(character):
             character.balance -= dict['Дрібничка']
             print("Ви купували Дрібничку!")
             character.add_item('Дрібничка')
-            character.update_stats()
+            character.update_stats("new")
             back = input("Щоб повернутись назад, натисніть ENTER\n")
     elif buying == 'Вудочка':
         character.balance -= dict['Вудочка']
@@ -69,7 +66,7 @@ def buy(character):
             character.balance -= dict['Вудочка']
             print("Ви купували Вудочку!")
             character.add_item('Вудочка')
-            character.update_stats()
+            character.update_stats("new")
             back = input("Щоб повернутись назад, натисніть ENTER\n")
     if back == '':
         welcomeclass.welcome(character.name, character.balance)

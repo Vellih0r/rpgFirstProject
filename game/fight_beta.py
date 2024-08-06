@@ -1,5 +1,50 @@
 from random import randint
 
+#імпровізації
+
+def frendly_fire(dmg):
+    print(f"Ви хотіли зробити вертушку ногою, але впали та отримали {dmg/2} урону!")
+    return int(dmg/2)
+
+
+def flow():
+    dmg = 50
+    print(f"Ви війшли в потік та нанесли {dmg} урону!")
+    return dmg
+
+
+def block(turns):
+    print("Ви замотали ворога вудочкою і вона зламалася")
+    print(f"Ворог не буде атакувати {turns} ходи")
+
+
+def suicide():
+    dmg = 100
+    print("Ви розгнівали сили пітьми та в вас вдарила молнія!")
+    print(f"Ви отримали {dmg} урону")
+    return dmg
+
+
+def poition(num):
+    if num == 1:
+        print("У ворога було зілля здоров'я - ви його вкрали!")
+        return "Health"
+    elif num == 2:
+        print("У ворога було зілля сили - ви його вкрали!")
+        return "Power"
+    elif num == 3:
+        print("У ворога було прокляте зілля! - ви його вкрали!")
+        return "Cursed"
+
+
+def rob(inventory):
+    if len(inventory) > 0:
+        item = inventory.pop()
+        print(f"Ви відволіклися та ворог вкрав {item} з вашого інвентарю!")
+    else:
+        print("Враг хотів щось в вас вкрасти, але ваш інвентар пустий")
+    
+
 # атака ворога
 def enemyAttack(hp):
 
@@ -25,6 +70,8 @@ def fight():
     ability_power = 5
     enemy_hp = 50
     player_hp = 100
+    inventory = ["Вудочка"]
+    counter = 0
 
     # цикл поки хтось не помре
     while True:
@@ -103,9 +150,42 @@ def fight():
 
         # процес імпровізації
         elif move == "Імпр":
-            pass
+            imp = randint(1, 4)
+            suicide = randint (1, 50)
+            if suicide == 4:
+                self_dmg = suicide()
+                print(self_dmg)
+                player_hp -= self_dmg
+            elif imp == 1:
+                self_dmg = frendly_fire(phis_dmg)
+                print(self_dmg)
+                player_hp -= self_dmg
+            elif imp == 2:
+                shot_dmg = flow()
+                print(shot_dmg)
+                enemy_hp -= shot_dmg
+            elif imp == 3:
+                if "Вудочка" in inventory:
+                    inventory.remove("Вудочка")
+                    turns = 2
+                    block(turns)
+                    counter += turns
+                else:
+                    p = randint(1, 4)
+                    inventory.append(poition(p))
+            elif imp == 4:
+                robbed = rob(inventory)
+                if len(inventory):
+                    inventory.remove(robbed)
+                #update_states(robbed)
+            
 
 
-        player_hp = enemyAttack(player_hp)
+        # перевірка чи не заблокований ворог
+        if counter == 0:
+            player_hp = enemyAttack(player_hp)
+        else:
+            counter -= 1
+            print("Враг пропустив свій хід")
 
 fight()

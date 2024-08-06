@@ -1,4 +1,6 @@
 from random import randint 
+import enemy
+
 class Player:
     def __init__(self, name):
 
@@ -7,16 +9,17 @@ class Player:
         self.balance = 0 # added new var.; by artyom
 
         self.health = 100
+        self.health_max = 100
         self.armor = 0
         self.phys_damage = 10
-        self.mag_damage = 0
+        self.ability_power = 5
         self.mana_pt = 100
         self.crit_chance = 0
 
         #added items which be available; by misha
         self.items = ["Клінок", "Щит", "Дрібничка", "Вудочка"]
 
-        self.inventory = []
+        self.inventory = ["Прокляте"]
 
         #added display stats; by misha
     def display_stats(self):
@@ -26,7 +29,7 @@ class Player:
 | Health: {self.health}
 | Armor: {self.armor}
 | Physical damage: {self.phys_damage}
-| Magical damage: {self.mag_damage}
+| Magical damage: {self.ability_power}
 | Crit chance: {self.crit_chance}
 {"-"*27}''')
     
@@ -48,19 +51,32 @@ class Player:
             print("404 item not found:", e)
 
     
-    #added IF new items added to items[] update states information; by misha
-    def update_stats(self):
-        if "Sword" == self.inventory[-1]:
-            self.phys_damage += 10
-            self.crit_chance += 5
-        if "Shield" == self.inventory[-1]:
-            self.armor += 10
-            self.health += 10
-        if "Trinket" == self.inventory[-1]:
-            self.mag_damage += 10
-            self.crit_chance += 5
-        if "Вудочка" == self.inventory[-1]:
-            print("Тепер ви можите рибачити!")
+    #added IF new items added to items[] update stats information; by misha
+    # new - if "new" - update, if item name - delete its stats
+    def update_stats(self, new):
+        if new == "new":
+            item = self.inventory[-1]
+            if "Клінок" == item:
+                self.phys_damage += 10
+                self.crit_chance += 5
+            elif "Щит" == item:
+                self.armor += 10
+                self.health += 10
+            elif "Дрібничка" == item:
+                self.ability_power += 10
+                self.crit_chance += 5
+            elif "Вудочка" == item:
+                print("Тепер ви можите рибачити!")
+        else:
+            if "Клінок" == new:
+                self.phys_damage -= 10
+                self.crit_chance -= 5
+            elif "Щит" == new:
+                    self.armor -= 10
+                    self.health -= 10
+            elif "Дрібничка" == new:
+                    self.ability_power -= 10
+                    self.crit_chance -= 5
 
 #fishing mechanic
     def fishing_process(self):
@@ -109,3 +125,236 @@ class Player:
             print("Ви зловили Карпіка :()")
             self.balance += 2
         print(f"На ваш рахунок зараховано: {self.balance}")
+
+
+
+    def poition_use(self):
+        if "Здоров'я" in self.inventory:
+            print("Ви маєте зілля хп")
+        if "Сили" in self.inventory:
+            print("Ви маєте зілля сили")
+        if "Прокляте" in self.inventory:
+            print("Ви маєте прокляте зілля")
+        poition_name = input("Напишіть назву зілля щоб використати: ")
+        poition_name = poition_name.title()
+        if poition_name == "Хп":
+            self.health = self.health_max
+            print("Ваше хп поповнено до 100!")
+            self.inventory.remove("Здоров'я")
+        elif poition_name == "Сили":
+            self.phys_damage += 10
+            print("Ваш урон збільшено на 10!")
+            self.inventory.remove("Сили")
+        elif poition_name == "Прокляте":
+            self.health_max = self.health_max // 2
+            self.health = self.health_max
+            self.ability_power += 20
+            print(f"Тепер ваше макс.хп - {self.health_max} -")
+            print("Але ваш магічний урон збільшено на 20")
+            self.inventory.remove("Прокляте")
+
+
+    def hospital(self):
+        print(f"Ви увійшли до госпіталю\n Ваше максимальне хп: {self.health_max}\n Ваше поточне хп: {self.health}")
+        heal_price = 10
+        max_price = 30
+        heal = input(f"Збільшити Максимальне хп(+20) - 'Макс' ({max_price})\n Відновити поточне хп - 'Хіл' ({heal_price})")
+        heal = heal.title()
+        if heal == "Макс":
+            if self.balance >= max_price:
+                self.balance -= max_price
+            else:
+                print("Невистачає грошей")
+        elif heal == "Хіл":
+            if self.balance >= heal_price:
+                self.balance -= heal_price
+                self.health = self.health_max
+            else:
+                print("Невистачає грошей")
+        else:
+            print("Неправильна команда")
+
+
+
+#імпровізації
+    def fight_process(self):
+
+        goblin = enemy.Enemy("Гоблін")
+
+
+        def frendly_fire(dmg):
+            print("-" * 27)
+            print(f"Ви хотіли зробити вертушку ногою, але впали та отримали {dmg//2} урону!")
+            return dmg//2
+
+
+        def flow():
+            dmg = goblin.hp//2
+            print("-" * 27)
+            print(f"Ви увійшли в потік та нанесли {dmg} урону!")
+            return dmg
+
+
+        def block(turns):
+            print("-" * 27)
+            print("Ви замотали ворога вудочкою і вона зламалася")
+            print(f"Ворог не буде атакувати {turns} ходи")
+
+
+        def suicide():
+            dmg = 100
+            print("-" * 27)
+            print("Ви розгнівали сили пітьми та в вас вдарила молнія!")
+            print(f"Ви отримали {dmg} урону")
+            return dmg
+
+
+        def poition(num):
+            print("-" * 27)
+            if num == 1:
+                print("У ворога було зілля здоров'я - ви його вкрали!")
+                return "Хп"
+            elif num == 2:
+                print("У ворога було зілля сили - ви його вкрали!")
+                return "Сили"
+            elif num == 3:
+                print("У ворога було прокляте зілля! - ви його вкрали!")
+                return "Прокляте"
+
+
+        def rob(inventory):
+            print("-" * 27)
+            if len(inventory) > 0:
+                item = inventory.pop()
+                print(f"Ви відволіклися та ворог вкрав {item} з вашого інвентарю!")
+            else:
+                print("Враг хотів щось в вас вкрасти, але ваш інвентар пустий")
+            
+
+        def fight():
+
+            block_counter = 0
+
+            # цикл поки хтось не помре
+            while True:
+
+                # перевірити хп(чи помер гравець чи ворог)
+                if goblin.hp <= 0:
+                    print("\nВи вбили ворога!")
+                    gold = randint(10,21)
+                    print(f"Та заробили {gold} золота!")
+                    self.balance += gold
+                    break
+
+                elif self.health <= 0:
+                    print("\nВи померли!")
+                    break
+
+                #написати хп
+                else:
+                    print(f"\n{'*' * 27}\nЗдоров'я ворога - {goblin.hp}")
+                    print(f"Ваше здоров'я -- {self.health}\n{'*' * 27}\n")
+
+
+                #вибрати дію
+                move = input('''Що ви робите у бійці?\n
+        Дії:
+        | Атака(залежить від урону та шансу кріта)
+        | Хіл(залежить від магії)
+        | Імпр - імпровізація\n''')
+                
+                move = move.title()
+
+                # процес атаки
+                if move == "Атака":
+                    type = input("Фіз/маг?\n")
+                    type = type.title()
+                    if type == "Фіз":
+
+                        # урон та розрахунок чи спрацював кріт
+                        damage = 0
+                        tmp_crit = randint(0,101)
+
+                        # внести урон кріту чи без кріту
+                        if tmp_crit > (100 - self.crit_chance):
+                            damage = self.phys_damage * 2
+                            print(f"\nВи нанесли критичний удар!\n Ви нанесли - {damage} - урона")
+                        else:
+                            damage = self.phys_damage
+                            print(f"\nВи нанесли звичайний удар\n Ви нанесли - {damage} - урона")
+                        tmp_hp = goblin.hp - damage
+                        goblin.hp = tmp_hp
+                    elif type == "Маг":
+                        
+                        damage = 0
+                        tmp_crit = randint(0, 101)
+
+                        if tmp_crit > (100 - self.crit_chance):
+                            damage = self.ability_power * 2.5
+                            print(f"\nВи нанесли критичний удар!\n Ви нанесли - {damage} - урона")
+                        else:
+                            damage = self.ability_power
+                            print(f"\nВи нанесли звичайний удар\n Ви нанесли - {damage} - урона")
+                        tmp_hp = goblin.hp - damage
+                        goblin.hp = tmp_hp
+                    else:
+                        print("Неправильне слово")
+                        continue
+
+                    
+
+                #процес хілу
+                elif move == "Хіл":
+                    heal = randint(5, 11) + self.ability_power
+                    doubleheal_chance = randint(0,101)
+                    if doubleheal_chance > (100 - doubleheal_chance):
+                        heal *= 2
+                    if heal + self.health > self.health_max:
+                        self.health = self.health_max
+                        print("\nВи поповнили хп до максимума")
+                    else:
+                        self.health += heal
+                        print(f"\nВи застосували Хіл\n Було відхилено - {heal} - здоров'я")
+                        print("")
+
+                # процес імпровізації
+                elif move == "Імпр":
+                    imp = randint(1, 4)
+                    suic = randint (1, 50)
+                    if suic == 4:
+                        s_dmg = suicide()
+                        self.health -= s_dmg
+                    elif imp == 1:
+                        s_dmg = frendly_fire(self.phys_damage)
+                        self.health -= s_dmg
+                    elif imp == 2:
+                        shot_dmg = flow()
+                        tmp_hp = goblin.hp - shot_dmg
+                        goblin.hp = tmp_hp
+                    elif imp == 3:
+                        if "Вудочка" in self.inventory:
+                            self.inventory.remove("Вудочка")
+                            turns = 2
+                            block(turns)
+                            block_counter += turns
+                        else:
+                            p = randint(1, 4)
+                            self.inventory.append(poition(p))
+                    elif imp == 4:
+                        robbed = rob(self.inventory)
+                        if len(self.inventory):
+                            self.inventory.remove(robbed)
+                        #update_states(robbed)
+                    
+                else:
+                    print("Неправильне слово")
+                    continue
+
+                # перевірка чи не заблокований ворог
+                if block_counter == 0:
+                    self.health -= goblin.enemyAttack()
+                else:
+                    block_counter -= 1
+                    print("Враг пропустив свій хід")
+
+        fight()

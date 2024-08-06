@@ -21,7 +21,7 @@ while True:
 
     # нехай буде перевірка смерті
     if Hero.health <= 0:
-        print(f"Ваше здоров'я = {Hero.health}, ви програли")
+        print(f"Ваше здоров'я = 0, ви програли")
         break
 
 
@@ -38,12 +38,17 @@ while True:
         elif action == "Інв": Hero.disp_invent()
         elif action == "Рибачити": Hero.fishing_process()
         elif action == "Вихід": break
+        elif action == "Ліс": Hero.fight_process()
+        elif action == "Зілля": Hero.poition_use()
+        elif action == "Хіл": Hero.hospital()
         elif action == "Допомога":
             print('''Список дій:
 | Стати - показати стати
 | Магазин - зайти в магазин
 | Інв - показати інвентар
 | Рибачити - піти на рибалку щоб заробити грошей
+| Зілля - використати зілля
+| Хіл - піти до госпіталю                                  
 | Ліс - піти у ліс для битви з ворогами
 | Вихід - вийти з гри''')
         else:
