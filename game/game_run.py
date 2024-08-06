@@ -1,24 +1,17 @@
-import pyglet
 import player
 import welcomeclass
 import shop
 from threading import Thread
 import pyglet
 
-
-stop_thread = False
-
 # функція для потоку з музикою
 def music():
-    print("start")
     music = pyglet.resource.media("dark.mp3")
     music.play()
     pyglet.app.run()
     # перевірка чи треба зупинити поток
 # Создаём новый поток
 th = Thread(target=music)
-
-# ВСЁ, что ниже мы можем закинуть в бесконечный игровой цикл ↓ ↓ ↓
 
 
 # добавлена переменная с запросом никнейма; by artyom
@@ -39,7 +32,7 @@ while True:
     # нехай буде перевірка смерті
     if Hero.health <= 0:
         print(f"Ваше здоров'я = 0, ви програли")
-
+        # зупинити музику
         pyglet.app.exit()
         break
 
