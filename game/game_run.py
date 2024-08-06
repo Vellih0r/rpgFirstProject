@@ -1,3 +1,4 @@
+import pyglet
 import player
 import welcomeclass
 import shop
@@ -14,7 +15,6 @@ Hero = player.Player(nickname)
 
 # вызов фукнции 'welcome'
 welcomeclass.welcome(Hero.name, Hero.balance)
-
 
 # нескічненний цикл з грою поки гравец не напише "Вихід"
 while True:
