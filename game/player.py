@@ -1,3 +1,4 @@
+import pyglet
 from random import randint 
 import enemy
 
@@ -178,7 +179,6 @@ class Player:
 
 #імпровізації
     def fight_process(self):
-
         goblin = enemy.Enemy("Гоблін")
 
 

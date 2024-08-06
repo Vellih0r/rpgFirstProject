@@ -1,3 +1,4 @@
+import pyglet
 from random import randint
 
 #імпровізації
