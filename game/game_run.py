@@ -49,7 +49,7 @@ while True:
             shop.buy(Hero)
         elif action == "Інв": Hero.disp_invent()
         elif action == "Рибачити": Hero.fishing_process()
-        elif action == "Вихід": break
+        elif action == "Вихід": pyglet.app.exit(); break
         elif action == "Ліс": Hero.fight_process()
         elif action == "Зілля": Hero.poition_use()
         elif action == "Хіл": Hero.hospital()
