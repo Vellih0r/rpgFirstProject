@@ -1,6 +1,7 @@
 import pyglet
 from random import randint 
 import enemy
+import boss
 
 class Player:
     def __init__(self, name):
@@ -179,10 +180,11 @@ class Player:
 
 
 #імпровізації
-    def fight_process(self):
-        goblin = enemy.Enemy("Гоблін")
-
-
+    def fight_process(self, enemy_class):
+        if enemy_class == "boss":
+            enemy = boss.Boss()
+        else:
+            enemy = enemy.Enemy()
         def friendly_fire(dmg):
             print("-" * 27)
             print(f"Ви хотіли зробити вертушку ногою, але впали та отримали {dmg//2} урону!")
@@ -190,7 +192,7 @@ class Player:
 
 
         def flow():
-            dmg = goblin.hp//2
+            dmg = enemy.hp//2
             print("-" * 27)
             print(f"Ви увійшли в потік та нанесли {dmg} урону!")
             return dmg
@@ -240,7 +242,7 @@ class Player:
             while True:
 
                 # перевірити хп(чи помер гравець чи ворог)
-                if goblin.hp <= 0:
+                if enemy.hp <= 0:
                     print("\nВи вбили ворога!")
                     gold = randint(10,21)
                     print(f"Та заробили {gold} золота!")
@@ -253,7 +255,7 @@ class Player:
 
                 #написати хп
                 else:
-                    print(f"\n{'*' * 27}\nЗдоров'я ворога - {goblin.hp}")
+                    print(f"\n{'*' * 27}\nЗдоров'я ворога - {enemy.hp}")
                     print(f"Ваше здоров'я -- {self.health}\n{'*' * 27}\n")
 
 
@@ -283,8 +285,8 @@ class Player:
                         else:
                             damage = self.phys_damage
                             print(f"\nВи нанесли звичайний удар\n Ви нанесли - {damage} - урона")
-                        tmp_hp = goblin.hp - damage
-                        goblin.hp = tmp_hp
+                        tmp_hp = enemy.hp - damage
+                        enemy.hp = tmp_hp
                     elif type == "Маг":
                         
                         damage = 0
@@ -296,8 +298,8 @@ class Player:
                         else:
                             damage = self.ability_power
                             print(f"\nВи нанесли звичайний удар\n Ви нанесли - {damage} - урона")
-                        tmp_hp = goblin.hp - damage
-                        goblin.hp = tmp_hp
+                        tmp_hp = enemy.hp - damage
+                        enemy.hp = tmp_hp
                     else:
                         print("Неправильне слово")
                         continue
@@ -326,8 +328,8 @@ class Player:
                     elif imp == 1:
                         self.health -= friendly_fire(self.phys_damage)
                     elif imp == 2:
-                        tmp_hp = goblin.hp - flow()
-                        goblin.hp -= tmp_hp
+                        tmp_hp = enemy.hp - flow()
+                        enemy.hp -= tmp_hp
                     elif imp == 3:
                         if "Вудочка" in self.inventory:
                             self.inventory.remove("Вудочка")
@@ -348,9 +350,17 @@ class Player:
 
                 # перевірка чи не заблокований ворог
                 if block_counter == 0:
-                    self.health -= goblin.enemyAttack()
+                    self.health -= enemy.enemyAttack()
                 else:
                     block_counter -= 1
                     print("Враг пропустив свій хід")
 
         fight()
+    
+    def boss_fight(self):
+        while True:
+            boss.Boss()
+            boss.Boss.random_atack()
+    boss_fight()
+
+       

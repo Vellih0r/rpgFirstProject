@@ -2,8 +2,7 @@ from random import randint
 
 
 class Enemy():
-    def __init__(self, name, hp = randint(20, 50), dmg = randint(5, 16), crit = randint(0, 101)):
-        self.name = name 
+    def __init__(self, hp = randint(20, 50), dmg = randint(5, 16), crit = randint(0, 101)):
         #added enemy stats
         self.__hp = hp
         self.dmg = dmg

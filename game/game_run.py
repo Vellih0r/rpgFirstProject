@@ -50,8 +50,9 @@ while True:
         elif action == "Інв": Hero.disp_invent()
         elif action == "Рибачити": Hero.fishing_process()
         elif action == "Вихід": pyglet.app.exit(); break
-        elif action == "Ліс": Hero.fight_process()
+        elif action == "Ліс": Hero.fight_process('boss')
         elif action == "Зілля": Hero.poition_use()
+        elif action == "Босс": Hero.fight_process('boss')
         elif action == "Хіл": Hero.hospital()
         elif action == "Допомога":
             print('''Список дій:
@@ -60,6 +61,7 @@ while True:
 | Інв - показати інвентар
 | Рибачити - піти на рибалку щоб заробити грошей
 | Зілля - використати зілля
+| Босс - кинути виклик боссу                
 | Хіл - піти до госпіталю                                  
 | Ліс - піти у ліс для битви з ворогами
 | Вихід - вийти з гри''')
