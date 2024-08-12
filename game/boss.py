@@ -1,11 +1,10 @@
-import player
 from random import randint
 class Boss():
     def __init__(self):
         self.name = "Мог повелитель крови"
         self.hp = 500
         self.dmg = 0
-        self.mag_resistance = 3
+        self.mag_resistance = 3 #maks priv
 
 
     def enemyAtack(self):
