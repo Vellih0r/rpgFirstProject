@@ -5,18 +5,25 @@ from welcomeclass import decorator
 
 # привітати в магазині та рандомно розрахувати ціну у словник
 @decorator
-def shopfunc(nickname, balance, items):
+def shopfunc(nickname, balance, items, potions):
     print(f'''
         Вітаємо в магазині, {nickname}!
       Твій баланс: {balance}
 ''')
-    global dict 
+    global dict, dict2
     dict = {}
+    dict2 = {}
     for i in items:
         pricerand = randint(10,40)
         dict[i] = pricerand
+    for i in potions:
+        pricerand = randint(70, 120)
+        dict2[i] = pricerand
     
     for key, val in dict.items():
+        print(f"Товар {key} коштує {val}\n")
+
+    for key, val in dict2.items():
         print(f"Товар {key} коштує {val}\n")
 
 # гравець вибирає та купує предмет
@@ -30,46 +37,56 @@ def buy(character):
     if buying == 'Клінок':
         if character.balance < dict['Клінок']: 
             print("Вам не вистачає грошей.")
-            back = input("Щоб повернутись назад, натисніть ENTER\n")
         else:
             character.balance -= dict['Клінок']
             print("Ви купували Клінок!")
             character.add_item('Клінок')
             character.update_stats("new")
-            back = input("Щоб повернутись назад, натисніть Enter\n")
     elif buying == 'Щит':
         if character.balance <  dict['Щит']:  
             print("Вам не вистачає грошей.")
-            back = input("Щоб повернутись назад, натисніть ENTER\n")
         else:
             character.balance -=  dict['Щит']
             print("Ви купували Щит!")
             character.add_item('Щит')
             character.update_stats("new")
-            back = input("Щоб повернутись назад, натисніть ENTER\n")
     elif buying == 'Дрібничка':
         if character.balance < dict['Дрібничка']: 
             print("Вам не вистачає грошей.")
-            back = input("Щоб повернутись назад, натисніть ENTER\n")
         else: 
             character.balance -= dict['Дрібничка']
             print("Ви купували Дрібничку!")
             character.add_item('Дрібничка')
             character.update_stats("new")
-            back = input("Щоб повернутись назад, натисніть ENTER\n")
     elif buying == 'Вудочка':
-        character.balance -= dict['Вудочка']
         if character.balance < dict['Вудочка']: 
             print("Вам не вистачає грошей.")
-            back = input("Щоб повернутись назад, натисніть ENTER\n")
         else:
             character.balance -= dict['Вудочка']
             print("Ви купували Вудочку!")
             character.add_item('Вудочка')
             character.update_stats("new")
-            back = input("Щоб повернутись назад, натисніть ENTER\n")
-    if back == '':
-        welcomeclass.welcome(character.name, character.balance)
+    elif buying == "Зілля Здоров'я":
+        if character.balance < dict2["Зілля здоров'я"]:
+            print("Вам не вистачає грошей.")
+        else:
+            character.balance -= dict2["Зілля здоров'я"]
+            print("Ви купували зілля здоров'я!")
+            character.add_item("Зілля здоров'я")
+    elif buying == "Прокляте Зілля":
+        if character.balance < dict2["Прокляте зілля"]:
+            print("Вам не вистачає грошей.")
+        else:
+            character.balance -= dict2["Прокляте зілля"]
+            print("Ви купували прокляте зілля!")
+            character.add_item("Прокляте зілля")
+    elif buying == "Зілля Сили":
+        if character.balance < dict2["Зілля сили"]:
+            print("Вам не вистачає грошей.")
+        else:
+            character.balance -= dict2["Зілля сили"]
+            print("Ви купували зілля сили!")
+            character.add_item("Зілля сили")
     
 
 

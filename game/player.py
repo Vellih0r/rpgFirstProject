@@ -19,8 +19,9 @@ class Player:
 
         #added items which be available; by misha
         self.items = ["Клінок", "Щит", "Дрібничка", "Вудочка"]
+        self.potions = ["Зілля Здоров'я", "Зілля Сили", "Прокляте зілля"]
 
-        self.inventory = ["Прокляте"]
+        self.inventory = []
 
         #added display stats; by misha
     def display_stats(self):
