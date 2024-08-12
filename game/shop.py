@@ -1,5 +1,4 @@
 from random import randint
-import welcomeclass
 from welcomeclass import decorator
 
 
@@ -24,7 +23,7 @@ def shopfunc(nickname, balance, items, potions):
         print(f"Товар {key} коштує {val}\n")
 
     for key, val in dict2.items():
-        print(f"Товар {key} коштує {val}\n")
+        print(f"Зілля {key} коштує {val}\n")
 
 # гравець вибирає та купує предмет
 def buy(character):
@@ -67,26 +66,26 @@ def buy(character):
             character.add_item('Вудочка')
             character.update_stats("new")
     elif buying == "Зілля Здоров'я":
-        if character.balance < dict2["Зілля здоров'я"]:
+        if character.balance < dict2["Здоров'я"]:
             print("Вам не вистачає грошей.")
         else:
-            character.balance -= dict2["Зілля здоров'я"]
+            character.balance -= dict2["Здоров'я"]
             print("Ви купували зілля здоров'я!")
-            character.add_item("Зілля здоров'я")
+            character.add_potion("Здоров'я")
     elif buying == "Прокляте Зілля":
-        if character.balance < dict2["Прокляте зілля"]:
+        if character.balance < dict2["Прокляте"]:
             print("Вам не вистачає грошей.")
         else:
-            character.balance -= dict2["Прокляте зілля"]
+            character.balance -= dict2["Прокляте"]
             print("Ви купували прокляте зілля!")
-            character.add_item("Прокляте зілля")
+            character.add_potion("Прокляте")
     elif buying == "Зілля Сили":
-        if character.balance < dict2["Зілля сили"]:
+        if character.balance < dict2["Сили"]:
             print("Вам не вистачає грошей.")
         else:
-            character.balance -= dict2["Зілля сили"]
+            character.balance -= dict2["Сили"]
             print("Ви купували зілля сили!")
-            character.add_item("Зілля сили")
+            character.add_potion("Cили")
     
 
 

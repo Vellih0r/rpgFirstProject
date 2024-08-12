@@ -19,7 +19,7 @@ class Player:
 
         #added items which be available; by misha
         self.items = ["Клінок", "Щит", "Дрібничка", "Вудочка"]
-        self.potions = ["Зілля Здоров'я", "Зілля Сили", "Прокляте зілля"]
+        self.potions = ["Здоров'я", "Сили", "Прокляте"]
 
         self.inventory = []
 
@@ -48,6 +48,14 @@ class Player:
         try:
             self.inventory.append(item)
             self.items.remove(item)
+            print(f"Тепер {item} у тебе в інвентарі")
+        except BaseException as e:
+            print("404 item not found:", e)
+
+    def add_potion(self, item):
+        try:
+            self.inventory.append(item)
+            self.potions.remove(item)
             print(f"Тепер {item} у тебе в інвентарі")
         except BaseException as e:
             print("404 item not found:", e)
