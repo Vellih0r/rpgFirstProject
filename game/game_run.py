@@ -1,6 +1,6 @@
 import player
 import welcomeclass
-import shop
+import shop   #ffff
 from threading import Thread
 import pyglet
 
