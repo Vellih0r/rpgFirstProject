@@ -8,7 +8,7 @@ class Boss():
         self.mag_resistance = 3
 
 
-    def random_atack(self):
+    def enemyAtack(self):
         block_counter = 0
         atack = randint(1,3)
         if self.hp > 250:

@@ -2,13 +2,13 @@ from random import randint
 
 
 class Enemy():
-    def __init__(self, hp = randint(20, 50), dmg = randint(5, 16), crit = randint(0, 101)):
+    def __init__(self, hp = randint(20, 50), dmg = randint(5, 16)):
 
         #added enemy stats
         self.__hp = hp
         self.dmg = dmg
 
-    def enemyAttack(self):
+    def enemyAtack(self):
 
             # розрахунок шансу кріта
             crit = randint(0, 101)

@@ -1,4 +1,3 @@
-import pyglet
 from random import randint 
 import enemy
 import boss
@@ -359,7 +358,7 @@ class Player:
 
                 # перевірка чи не заблокований ворог
                 if block_counter == 0:
-                    self.health -= enem.enemAttack()
+                    self.health -= enem.enemyAtack()
                 else:
                     block_counter -= 1
                     print("Ворог пропустив свій хід")
