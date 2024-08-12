@@ -189,11 +189,11 @@ class Player:
 
 
 #імпровізації
-    def fight_process(self, enemy_class):
-        if enemy_class == "boss":
-            enemy = boss.Boss()
+    def fight_process(self, en):
+        if en == "boss":
+            enem = boss.Boss()
         else:
-            enemy = enemy.Enemy()
+            enem = enemy.Enemy()
         def friendly_fire(dmg):
             print("-" * 27)
             print(f"Ви хотіли зробити вертушку ногою, але впали та отримали {dmg//2} урону!")
@@ -201,7 +201,7 @@ class Player:
 
 
         def flow():
-            dmg = enemy.hp//2
+            dmg = enem.hp//2
             print("-" * 27)
             print(f"Ви увійшли в потік та нанесли {dmg} урону!")
             return dmg
@@ -251,7 +251,7 @@ class Player:
             while True:
 
                 # перевірити хп(чи помер гравець чи ворог)
-                if enemy.hp <= 0:
+                if enem.hp <= 0:
                     print("\nВи вбили ворога!")
                     gold = randint(10,21)
                     print(f"Та заробили {gold} золота!")
@@ -264,7 +264,7 @@ class Player:
 
                 #написати хп
                 else:
-                    print(f"\n{'*' * 27}\nЗдоров'я ворога - {enemy.hp}")
+                    print(f"\n{'*' * 27}\nЗдоров'я ворога - {enem.hp}")
                     print(f"Ваше здоров'я -- {self.health}\n{'*' * 27}\n")
 
 
@@ -294,8 +294,8 @@ class Player:
                         else:
                             damage = self.phys_damage
                             print(f"\nВи нанесли звичайний удар\n Ви нанесли - {damage} - урона")
-                        tmp_hp = enemy.hp - damage
-                        enemy.hp = tmp_hp
+                        tmp_hp = enem.hp - damage
+                        enem.hp = tmp_hp
                     elif type == "Маг":
                         
                         damage = 0
@@ -307,8 +307,8 @@ class Player:
                         else:
                             damage = self.ability_power
                             print(f"\nВи нанесли звичайний удар\n Ви нанесли - {damage} - урона")
-                        tmp_hp = enemy.hp - damage
-                        enemy.hp = tmp_hp
+                        tmp_hp = enem.hp - damage
+                        enem.hp = tmp_hp
                     else:
                         print("Неправильне слово")
                         continue
@@ -337,8 +337,8 @@ class Player:
                     elif imp == 1:
                         self.health -= friendly_fire(self.phys_damage)
                     elif imp == 2:
-                        tmp_hp = enemy.hp - flow()
-                        enemy.hp -= tmp_hp
+                        tmp_hp = enem.hp - flow()
+                        enem.hp -= tmp_hp
                     elif imp == 3:
                         if "Вудочка" in self.inventory:
                             self.inventory.remove("Вудочка")
@@ -351,7 +351,7 @@ class Player:
                         robbed = rob(self.inventory)
                         if len(self.inventory) > 0:
                             self.inventory.remove(robbed)
-                        #update_states(robbed)
+                        self.update_states(robbed)
                     
                 else:
                     print("Неправильне слово")
@@ -359,17 +359,11 @@ class Player:
 
                 # перевірка чи не заблокований ворог
                 if block_counter == 0:
-                    self.health -= enemy.enemyAttack()
+                    self.health -= enem.enemAttack()
                 else:
                     block_counter -= 1
-                    print("Враг пропустив свій хід")
+                    print("Ворог пропустив свій хід")
 
         fight()
-    
-    def boss_fight(self):
-        while True:
-            boss.Boss()
-            boss.Boss.random_atack()
-    boss_fight()
 
        

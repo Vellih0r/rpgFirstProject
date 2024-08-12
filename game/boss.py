@@ -6,6 +6,8 @@ class Boss():
         self.hp = 500
         self.dmg = 0
         self.mag_resistance = 3
+
+
     def random_atack(self):
         block_counter = 0
         atack = randint(1,3)
@@ -39,9 +41,8 @@ class Boss():
                 self.hp += 40
                 block_counter += 1
                 return self.dmg
-    def boss_fight(self):
-        while True:
-            self.random_atack()
+
+
     @property
     def hp(self):
         return self.__hp
@@ -49,6 +50,3 @@ class Boss():
     @hp.setter
     def hp(self, hp):
         self.__hp = hp
-
-FASF = Boss()
-FASF.boss_fight()
