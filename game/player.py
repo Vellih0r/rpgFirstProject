@@ -187,11 +187,12 @@ class Player:
 
 
 
-#імпровізації
+#імпровізації 
+#босс файт
     def fight_process(self, en):
-        if en == "boss":
+        if en == "boss": #якщо їдемо на босса 
             enem = boss.Boss()
-        else:
+        else:            #якщо їдемо в ліс
             enem = enemy.Enemy()
         def friendly_fire(dmg):
             print("-" * 27)
@@ -200,7 +201,7 @@ class Player:
 
 
         def flow():
-            dmg = enem.hp//2
+            dmg = 100
             print("-" * 27)
             print(f"Ви увійшли в потік та нанесли {dmg} урону!")
             return dmg
@@ -284,28 +285,28 @@ class Player:
 
                         # урон та розрахунок чи спрацював кріт
                         damage = 0
-                        tmp_crit = randint(0,101)
+                        tmp_crit = randint(0,100)
 
                         # внести урон кріту чи без кріту
                         if tmp_crit >= (100 - self.crit_chance):
                             damage = self.phys_damage * 2.5
-                            print(f"\nВи нанесли критичний удар!\n Ви нанесли - {damage} - урона")
+                            print(f"\nВи нанесли критичний удар!\nВи нанесли - {damage} - урона")
                         else:
                             damage = self.phys_damage
-                            print(f"\nВи нанесли звичайний удар\n Ви нанесли - {damage} - урона")
+                            print(f"\nВи нанесли звичайний удар\nВи нанесли - {damage} - урона")
                         tmp_hp = enem.hp - damage
                         enem.hp = tmp_hp
                     elif type == "Маг":
                         
                         damage = 0
-                        tmp_crit = randint(0, 101)
+                        tmp_crit = randint(0, 100)
 
                         if tmp_crit >= (100 - self.crit_chance):
                             damage = self.ability_power * 2
-                            print(f"\nВи нанесли критичний удар!\n Ви нанесли - {damage} - урона")
+                            print(f"\nВи нанесли критичний удар!\nВи нанесли - {damage} - урона")
                         else:
                             damage = self.ability_power
-                            print(f"\nВи нанесли звичайний удар\n Ви нанесли - {damage} - урона")
+                            print(f"\nВи нанесли звичайний удар\nВи нанесли - {damage} - урона")
                         tmp_hp = enem.hp - damage
                         enem.hp = tmp_hp
                     else:
@@ -316,8 +317,8 @@ class Player:
 
                 #процес хілу
                 elif move == "Хіл":
-                    heal = randint(5, 11) + self.ability_power
-                    doubleheal_chance = randint(0,101)
+                    heal = randint(5, 10) + self.ability_power
+                    doubleheal_chance = randint(0,100)
                     if doubleheal_chance >= 75:
                         heal *= 2
                     if heal + self.health > self.health_max:
@@ -329,28 +330,28 @@ class Player:
 
                 # процес імпровізації
                 elif move == "Імпр":
-                    imp = randint(1, 5)
-                    suic = randint (1, 21)
+                    imp = randint(1, 4)
+                    suic = randint (1, 20)
                     if suic == 4:
                         self.health -= suicide()
                     elif imp == 1:
                         self.health -= friendly_fire(self.phys_damage)
                     elif imp == 2:
                         tmp_hp = enem.hp - flow()
-                        enem.hp -= tmp_hp
+                        enem.hp = tmp_hp
                     elif imp == 3:
                         if "Вудочка" in self.inventory:
                             self.inventory.remove("Вудочка")
                             block(2)
                             block_counter += 2
                         else:
-                            p = randint(1, 4)
+                            p = randint(1, 3)
                             self.inventory.append(poition(p))
                     elif imp == 4:
                         robbed = rob(self.inventory)
                         if len(self.inventory) > 0:
                             self.inventory.remove(robbed)
-                        self.update_states(robbed)
+                            self.update_states(robbed)
                     
                 else:
                     print("Неправильне слово")

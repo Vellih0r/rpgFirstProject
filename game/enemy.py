@@ -29,3 +29,4 @@ class Enemy():
     @hp.setter
     def hp(self, hp):
         self.__hp = hp
+     

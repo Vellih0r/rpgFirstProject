@@ -2,43 +2,50 @@ from random import randint
 class Boss():
     def __init__(self):
         self.name = "Мог повелитель крови"
-        self.hp = 500
+        self.__hp = 300
         self.dmg = 0
         self.mag_resistance = 3 #maks priv
-
-
+        
+#атаки
     def enemyAtack(self):
-        block_counter = 0
-        atack = randint(1,3)
-        if self.hp > 250:
-            atack = randint(1,3)
-            if block_counter > 0:
+        block__counter = 0
+        atack = randint(1,2)
+        if self.__hp > 150:
+            atack = randint(1,2)
+            if block__counter > 0:
                 print("У вас появилось окно для удара:")
-                block_counter -= 1   
+                block__counter -= 1  
+                return 0
             if atack == 1:
-                self.dmg = 30
+                self.dmg = 15
+                print("Мог совершил круговой удар копьем вокруг себя 'вам нанесли 15 урона'")
+                return  15
+            if atack == 2:
+                self.dmg = 25
+                print("Мог нанес удар копьем в прыжке Вам нанесли 25 урона")
+                return  25
+        elif self.__hp < 150:
+            atack = randint(1,4) 
+            if block__counter > 0:
+                print("У вас появилось окно для удара:")
+                block__counter -= 1   
+            if atack == 1:
+                self.dmg = 15
+                print("Мог совершил круговой удар копьем вокруг себя 'вам нанесли 15 урона'")
                 return self.dmg
             if atack == 2:
-                self.dmg = 50
-                return self.dmg
-        if self.hp < 250:
-            atack = randint(1,5) 
-            if block_counter > 0:
-                print("У вас появилось окно для удара:")
-                block_counter -= 1   
-            if atack == 1:
-                self.dmg = 30
-                return self.dmg
-            if atack == 2:
-                self.dmg = 50
+                self.dmg = 25
+                print("Мог нанес удар копьем в прыжке Вам нанесли 25 урона")
                 return self.dmg
             if atack == 3:
-                self.dmg = 70
+                self.dmg = 35
+                print("Мог использовал магию крови и попал в вас кровавыми лезвиями 'Вам нанесли 35 урона' ")
                 return self.dmg
             if atack == 4:
-                self.dmg = 50
-                self.hp += 40
-                block_counter += 1
+                self.dmg = 25
+                self.__hp += 20
+                print("Мог нанес вам сокрушительный удар копьем 'Вам нанесли 25 урона' \n ВРАГ ОТХИЛИЛСЯ")
+                block__counter += 1
                 return self.dmg
 
 
@@ -47,5 +54,6 @@ class Boss():
         return self.__hp
         
     @hp.setter
-    def hp(self, hp):
-        self.__hp = hp
+    def hp(self, __hp):
+        self.__hp = __hp
+        

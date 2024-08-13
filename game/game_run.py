@@ -10,9 +10,14 @@ def music():
     music.play()
     pyglet.app.run()
     # перевірка чи треба зупинити поток
+def boss_music():
+    boss_music = pyglet.resource.media("joj.mp3")
+    boss_music.play()
+    pyglet.app.run()
+    # перевірка чи треба зупинити поток
 # Создаём новый поток
 th = Thread(target=music)
-
+boss = Thread(target=boss_music)
 
 # добавлена переменная с запросом никнейма; by artyom
 nickname = input("Введіть свій нікнейм:\n")
@@ -50,9 +55,13 @@ while True:
         elif action == "Інв": Hero.disp_invent()
         elif action == "Рибачити": Hero.fishing_process()
         elif action == "Вихід": pyglet.app.exit(); break
-        elif action == "Ліс": Hero.fight_process('enemy')
+        elif action == "Ліс": Hero.fight_process('ene')
         elif action == "Зілля": Hero.poition_use()
-        elif action == "Босс": Hero.fight_process('boss')
+        elif action == "Босс": 
+            th.kill()
+            boss.start()
+            Hero.fight_process('boss')
+        
         elif action == "Хіл": Hero.hospital()
         elif action == "Допомога":
             print('''Список дій:
@@ -69,3 +78,4 @@ while True:
             print("Такої дії неіснує")
     except BaseException as a:
         print("Помилка", a)
+        
