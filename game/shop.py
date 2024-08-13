@@ -25,6 +25,14 @@ def shopfunc(nickname, balance, items, potions):
     for key, val in dict2.items():
         print(f"Зілля {key} коштує {val}\n")
 
+def display():
+    for key, val in dict.items():
+        print(f"Товар {key} коштує {val}\n")
+
+    for key, val in dict2.items():
+        print(f"Зілля {key} коштує {val}\n")
+
+
 # гравець вибирає та купує предмет
 def buy(character):
     # вибір предмету по назві
