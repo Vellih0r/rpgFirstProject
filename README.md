@@ -3,10 +3,11 @@
   This project for us is all about learning python, OOP, in/out, loops, conditions and stuff.
 
 "We" - it's a group of 3 programmers:
-
 Vellichor
+
 Shadowww
-Senku_qq
+
+Senku-qq
 
     What are in the game:
   In summer 2024 we decided to start learning python, and it's our first project.
