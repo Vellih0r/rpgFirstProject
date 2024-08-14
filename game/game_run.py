@@ -55,7 +55,7 @@ while True:
         elif action == "Інв": Hero.disp_invent()
         elif action == "Рибачити": Hero.fishing_process()
         elif action == "Вихід": pyglet.app.exit(); break
-        elif action == "Ліс": Hero.fight_process('ene')
+        elif action == "Ліс": Hero.fight_process('enemy')
         elif action == "Зілля": Hero.poition_use()
         elif action == "Босс": Hero.fight_process('boss')
         elif action == "Хіл": Hero.hospital()
@@ -72,5 +72,7 @@ while True:
 | Вихід - вийти з гри''')
         else:
             print("Такої дії неіснує")
-    except BaseException as a:
-        print("Помилка", a)
+    finally:
+            pass
+    #except BaseException as a:
+        #print("Помилка", a)

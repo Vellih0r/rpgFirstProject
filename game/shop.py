@@ -16,8 +16,9 @@ def shopfunc(nickname, balance, items, potions):
         pricerand = randint(10,40)
         dict[i] = pricerand
     for i in potions:
-        pricerand = randint(70, 120)
+        pricerand = randint(50, 70)
         dict2[i] = pricerand
+    dict['Вудочка'] = 25
     
     for key, val in dict.items():
         print(f"Товар {key} коштує {val}\n")
