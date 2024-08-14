@@ -46,13 +46,13 @@ while True:
     action = (input('''Що ви хочите зробити?
 якщо не знаєте напишіть "допомога": '''))
     action = action.title()
-    
+     #git
     try:
         if action == "Стати": Hero.display_stats()
         elif action == "Магазин": 
             shop.shopfunc(Hero.name, Hero.balance, Hero.items, Hero.potions)
             shop.buy(Hero)
-        elif action == "Інв": Hero.disp_invent()
+        elif action == "Інв":Hero.disp_invent()
         elif action == "Рибачити": Hero.fishing_process()
         elif action == "Вихід": pyglet.app.exit(); break
         elif action == "Ліс": Hero.fight_process('ene')
