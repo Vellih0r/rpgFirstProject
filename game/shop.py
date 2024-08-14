@@ -1,7 +1,7 @@
 from random import randint
 from welcomeclass import decorator
 
-
+#f
 # привітати в магазині та рандомно розрахувати ціну у словник
 @decorator
 def shopfunc(nickname, balance, items, potions):

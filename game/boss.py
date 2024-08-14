@@ -5,7 +5,7 @@ class Boss():
         self.__hp = 300
         self.dmg = 0
         self.mag_resistance = 3 #maks priv
-        
+        #f
 #атаки
     def enemyAtack(self):
         block__counter = 0
