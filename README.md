@@ -13,5 +13,7 @@ It's a small console rpg game. User can decide what to do by writing messages. I
 
     We used such libraries:
 random - random numbers
+
 colorama - for coloring text (needs to be intalled)
+
 pyglet - for music (needs to be installed)
