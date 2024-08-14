@@ -3,6 +3,7 @@
   This project for us is all about learning python, OOP, in/out, loops, conditions and stuff.
 
 "We" - it's a group of 3 programmers:
+
 Vellichor
 Shadowww
 Senku_qq
