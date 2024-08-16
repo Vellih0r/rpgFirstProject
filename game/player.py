@@ -99,7 +99,7 @@ class Player:
         #RULES FOR FISHING
         counter = 0
         fishing_rules = input("Хочите подивитися правила гри? Так/ні:  ")
-
+        fishing_rules.title()
         if "Так" in fishing_rules:
             print("Правила рибалки: \n""У вас є 5 спроб поки вудочка не зламалася\n", "Після пятої спроби міні-гра закінчиться\n", "Ось і всіправила:")
         else:
