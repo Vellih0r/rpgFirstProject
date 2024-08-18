@@ -55,6 +55,7 @@ class Player:
     def add_item(self, item):
         try:
             self.inventory.append(item)
+            self.items.remove(item)
             print(f"Тепер {item} у тебе в інвентарі")
         except BaseException as e:
             print("404 item not found:", e)
@@ -62,6 +63,7 @@ class Player:
     def add_potion(self, item):
         try:
             self.inventory.append(item)
+            self.potions.remove(item)
             print(f"Тепер {item} у тебе в інвентарі")
         except BaseException as e:
             print("404 item not found:", e)
@@ -244,37 +246,31 @@ class Player:
 
 
 
-    def potion_use(self):
-        c = 0
+    def poition_use(self):
         if "Здоров'я" in self.inventory:
             print("Ви маєте зілля хп")
-            c += 1
         if "Сили" in self.inventory:
             print("Ви маєте зілля сили")
-            c += 1
         if "Прокляте" in self.inventory:
             print("Ви маєте прокляте зілля")
-            c += 1
-        if c > 0:
-            potion_name = input(f"Ви маєте {c} зілля! Напишіть назву зілля щоб використати:\n")
-            potion_name = potion_name.title()
-            if potion_name == "Хп" and "Здоров'я" in self.inventory:
-                self.health = self.health_max
-                print("Ваше хп поповнено до максимума!")
-                self.inventory.remove("Здоров'я")
-            elif potion_name == "Сили" and "Сили" in self.inventory:
-                self.phys_damage += 10
-                print("Ваш урон збільшено на 10!")
-                self.inventory.remove("Сили")
-            elif potion_name == "Прокляте" and "Прокляте" in self.inventory:
-                self.health_max = self.health_max // 2
-                self.health = self.health_max
-                self.ability_power += 20
-                print(f"Тепер ваше макс.хп - {self.health_max} -")
-                print("Але ваш магічний урон збільшено на 20")
-                self.inventory.remove("Прокляте")
-        else:
-            print("На жаль в вас немає жодного зілля")
+        poition_name = input("Напишіть назву зілля щоб використати: ")
+        poition_name = poition_name.title()
+        if poition_name == "Хп" and "Здоров'я" in self.inventory:
+            self.health = self.health_max
+            print("Ваше хп поповнено до максимума!")
+            self.inventory.remove("Здоров'я")
+        elif poition_name == "Сили" and "Сили" in self.inventory:
+            self.phys_damage += 10
+            print("Ваш урон збільшено на 10!")
+            self.inventory.remove("Сили")
+        elif poition_name == "Прокляте" and "Прокляте" in self.inventory:
+            self.health_max = self.health_max // 2
+            self.health = self.health_max
+            self.ability_power += 20
+            print(f"Тепер ваше макс.хп - {self.health_max} -")
+            print("Але ваш магічний урон збільшено на 20")
+            self.inventory.remove("Прокляте")
+
 
     def hospital(self):
         print(f"Ви увійшли до госпіталю\n Ваше максимальне хп: {self.health_max}\n Ваше поточне хп: {self.health}")
@@ -285,7 +281,7 @@ class Player:
         if heal == "Макс":
             if self.balance >= max_price:
                 self.balance -= max_price
-                self.health_max += 15
+                self.health_max += 10
             else:
                 print("Невистачає грошей")
         elif heal == "Хіл":
@@ -333,7 +329,7 @@ class Player:
             return dmg
 
 
-        def potion(num):
+        def poition(num):
             print("-" * 27)
             if num == 1:
                 print("У ворога було зілля здоров'я - ви його вкрали!")
@@ -351,10 +347,8 @@ class Player:
             if len(inventory) > 0:
                 item = inventory.pop()
                 print(f"Ви відволіклися та ворог вкрав {item} з вашого інвентарю!")
-                return(item)
             else:
                 print("Враг хотів щось в вас вкрасти, але ваш інвентар пустий")
-            
             
 
         def fight():
@@ -378,15 +372,12 @@ class Player:
         Дії:
         | Атака(залежить від урону та шансу кріта)
         | Хіл(залежить від магії)
-        | Імпр - імпровізація
-        | Зілля - використати зілля\n''')
+        | Імпр - імпровізація\n''')
                 
                 move = move.title()
-                if move == "Зілля":
-                    self.potion_use()
-                    block_counter += 1
+
                 # процес атаки
-                elif move == "Атака":
+                if move == "Атака":
                     type = input("Фіз/маг?\n")
                     type = type.title()
                     if type == "Фіз":
@@ -422,7 +413,7 @@ class Player:
                         continue
 
                     
-                # potion
+
                 #процес хілу
                 elif move == "Хіл":
                     heal = randint(5, 10) + self.ability_power
@@ -454,15 +445,12 @@ class Player:
                             block_counter += 2
                         else:
                             p = randint(1, 3)
-                            self.inventory.append(potion(p))
+                            self.inventory.append(poition(p))
                     elif imp == 4:
                         robbed = rob(self.inventory)
                         if len(self.inventory) > 0:
-                            if robbed == "Здоров'я" or robbed == "Сили" or robbed == "Прокляте":
-                                self.potions.append(robbed)
-                            else:
-                                self.update_stats(robbed)
-                                self.items.append(robbed)
+                            self.inventory.remove(robbed)
+                            self.update_states(robbed)
                     
                 else:
                     print("Неправильне слово")
@@ -496,7 +484,7 @@ class Player:
                     self.health -= enem.enemyAtack()
                 else:
                     block_counter -= 1
-                    print("Ворог нічого не робить")
+                    print("Ворог пропустив свій хід")
 
         fight()
 
