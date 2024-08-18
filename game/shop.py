@@ -40,7 +40,7 @@ def buy(character):
     # вибір предмету по назві
     buying = input("Чи бажаєте ви купити щось?\n\
 Якщо так, введіть назву предмета\n")
-    #fggdasdasdasd
+
     buying = buying.title()
     print(buying)
     if buying == 'Клінок':
