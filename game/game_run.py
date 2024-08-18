@@ -48,7 +48,7 @@ while True:
             if shop_enter == False:
                 shop.shopfunc(Hero.name, Hero.balance, Hero.items, Hero.potions)
                 shop.buy(Hero)
-                shop_enter == True
+                shop_enter = True
             else:
                 shop.display()
                 shop.buy(Hero)
@@ -56,7 +56,7 @@ while True:
         elif action == "Рибачити": Hero.fishing_process()
         elif action == "Вихід": pyglet.app.exit(); break
         elif action == "Ліс": Hero.fight_process('enemy')
-        elif action == "Зілля": Hero.poition_use()
+        elif action == "Зілля": Hero.potion_use()
         elif action == "Босс": Hero.fight_process('boss')
         elif action == "Хіл": Hero.hospital()
         elif action == "Прокачка": Hero.skill_upgrade()

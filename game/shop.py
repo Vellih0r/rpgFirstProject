@@ -26,6 +26,7 @@ def shopfunc(nickname, balance, items, potions):
     for key, val in dict2.items():
         print(f"Зілля {key} коштує {val}\n")
 
+
 def display():
     for key, val in dict.items():
         print(f"Товар {key} коштує {val}\n")
@@ -41,7 +42,7 @@ def buy(character):
 Якщо так, введіть назву предмета\n")
 
     buying = buying.title()
-
+    print(buying)
     if buying == 'Клінок':
         if character.balance < dict['Клінок']: 
             print("Вам не вистачає грошей.")
@@ -74,14 +75,14 @@ def buy(character):
             print("Ви купували Вудочку!")
             character.add_item('Вудочка')
             character.update_stats("new")
-    elif buying == "Зілля Здоров'я":
+    elif buying == "Зілля Здоров'Я":
         if character.balance < dict2["Здоров'я"]:
             print("Вам не вистачає грошей.")
         else:
             character.balance -= dict2["Здоров'я"]
             print("Ви купували зілля здоров'я!")
             character.add_potion("Здоров'я")
-    elif buying == "Прокляте Зілля":
+    elif buying == "Зілля Прокляте":
         if character.balance < dict2["Прокляте"]:
             print("Вам не вистачає грошей.")
         else:
