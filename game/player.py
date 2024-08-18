@@ -15,7 +15,7 @@ class Player:
         self.health = 100
         self.health_max = 100
         self.armor = 0
-        self.phys_damage = 3000
+        self.phys_damage = 10
         self.ability_power = 5
         self.mana_pt = 100
         self.crit_chance = 0
@@ -33,11 +33,13 @@ class Player:
 |
 | Balance: {self.balance}
 | Health: {self.health}
+| Max Health: {self.health_max}
 | Armor: {self.armor}
 | Physical damage: {self.phys_damage}
 | Magical damage: {self.ability_power}
 | Crit chance: {self.crit_chance}
 | Xp: {self.xp}
+| Skill points: {self.skill_points}
 
 {"-"*27}''')
     
@@ -66,8 +68,33 @@ class Player:
         except BaseException as e:
             print("404 item not found:", e)
     #skill mechanik
+    def skill_information(self):
+        print("У вас есть один скилл поинт!\nВы можете использоваться его в меню прокачки")
+    def add_skill_points(self):
+        try:
+            while self.xp >= 100:
+                self.skill_points += 1
+                self.xp -= 100
+        except BaseException as e:
+            print("В вас недостатьо xp")
+        
     def skill_upgrade(self):
-            pass
+        try:
+            if self.skill_points >= 1:
+                print(''' МЕНЮ ПРОКАЧКИ 
+| Сила - збильшує ваш урон
+| Интелект - збильщує кількість мани
+| Стойкость - збильшує кількість хп 
+                      ''')
+                action = input("Що бажаєте прокачати?: ")
+                action = action.title()
+                if action == "Сила": self.phys_damage += 5; self.skill_points -= 1 ; print(f"Ваш урон збільшено на 5 зараз в вас його: {self.phys_damage}")
+                if action == "Интелект": self.mana_pt += 10; self.skill_points -= 1; print(f"Ваш мана пул збільщенно на 20. Зараз в вас {self.mana_pt} мани")
+                if action == "Стойкость": self.health_max += 10; self.skill_points -= 1; print (f"Ваше максимальне хп збільшенно на 10.Зараз в вас {self.health_max} макс хп")
+        except BaseException as e:
+            print("404 У вас недостатньо скилл поинтів", e)
+
+                
         
     #added IF new items added to items[] update stats information; by misha
     # new - if "new" - update, if item name - delete its stats
@@ -101,7 +128,7 @@ class Player:
         #RULES FOR FISHING
         counter = 0
         fishing_rules = input("Хочите подивитися правила гри? Так/ні:  ")
-
+        fishing_rules.title()
         if "Так" in fishing_rules:
             print("Правила рибалки: \n""У вас є 5 спроб поки вудочка не зламалася\n", "Після пятої спроби міні-гра закінчиться\n", "Ось і всіправила:")
         else:
@@ -432,18 +459,24 @@ class Player:
                 if enem.hp <= 0 and en == "enemy":
                     print("\nВи вбили ворога!")
                     gold = randint(10,21)
-                    xp = randint (8,15)
-                    print(f"Та заробили {gold} золота та отримали {xp} xp!")
+                    xp = randint (50,100)
                     self.balance += gold
                     self.xp += xp 
+                    #self.skill_points()
+                    if self.xp >= 100:
+                        self.skill_information()
+                        self.add_skill_points()
+                    print(f"Ви заробили {gold} золота та отримали {xp} xp!")
                     break
                 if enem.hp <= 0 and en == "boss":
                     print(Fore.RED+"Мог повелитель крови был повержен!"+ Style.RESET_ALL)
                     gold = 450
                     xp =  600
-                    print(f"Ви заробили {gold} золота та отримали {xp} xp!")
                     self.balance += gold
                     self.xp += xp 
+                    if self.xp >= 100:
+                        self.add_skill_points()
+                    print(f"Ви заробили {gold} золота та отримали {xp} xp!")
                     break
                 
                 # перевірка чи не заблокований ворог
