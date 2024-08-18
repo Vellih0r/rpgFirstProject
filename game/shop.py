@@ -51,14 +51,6 @@ def buy(character):
             print("Ви купували Клінок!")
             character.add_item('Клінок')
             character.update_stats("new")
-    elif buying == 'Щит':
-        if character.balance <  dict['Щит']:  
-            print("Вам не вистачає грошей.")
-        else:
-            character.balance -=  dict['Щит']
-            print("Ви купували Щит!")
-            character.add_item('Щит')
-            character.update_stats("new")
     elif buying == 'Дрібничка':
         if character.balance < dict['Дрібничка']: 
             print("Вам не вистачає грошей.")

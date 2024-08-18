@@ -21,7 +21,7 @@ class Player:
         self.crit_chance = 0
 
         #added items which be available; by misha
-        self.items = ["Клінок", "Щит", "Дрібничка", "Вудочка"]
+        self.items = ["Клінок", "Дрібничка", "Вудочка"]
         self.potions = ["Здоров'я", "Сили", "Прокляте"]
 
         self.inventory = ["Вудочка"]
@@ -69,7 +69,7 @@ class Player:
             print("404 item not found:", e)
     #skill mechanik
     def skill_information(self):
-        print("У вас есть один скилл поинт!\nВы можете использоваться его в меню прокачки")
+        print("В вас є один скилл поинт!\nВы можете використати його в меню прокачки")
     def add_skill_points(self):
         try:
             while self.xp >= 100:
@@ -148,40 +148,40 @@ class Player:
     def fish_random(self):
         counter_fish_moves = 0
         counter_fish_distance = 0
-        print("|Когда рыба двигается в какую то из сторон вам нужно двигать удочку в противополоную\n|У рыбы всего 6 движений,\n|У вас есть право на 2 ошибки\n|Удачи!")
+        print("|Коли рыба рухаєтся в якусь зі сторін вам потрібно рухати вудочку в противоположну\n|У рыбы усього 6 рухів,\n|В вас є право на 2 помилки\n|Удачи!")
         while counter_fish_moves < 6:
             random_move = randint(1,4)
             if random_move == 1:
-                fish_move = input("Рыба двигается вверх [w,a,s,d]: ")
+                fish_move = input("Рыба рухаєтся вверх [w,a,s,d]: ")
                 if "s" in fish_move:
                     chance_to_lose_fish = randint(0,100)
                     if chance_to_lose_fish > 90:
                         counter_fish_moves += 1
-                        print("Вы тянули рыбу не достаточно сильно\nРыба отдалилась")
+                        print("Вы тянули рыбу не достатньо сильно\nРыба віддалилась")
                     else:
                         counter_fish_moves += 1
                         counter_fish_distance += 1
-                        print(Fore.GREEN + "Вы подтянули рыбу к себе" + Style.RESET_ALL)
+                        print(Fore.GREEN + "Вы підтягнули рыбу до себе" + Style.RESET_ALL)
                 else:
                     counter_fish_moves += 1
                     print("Вы двинули удочку не в ту сторону")
             if random_move == 2:
-                fish_move = input("Рыба двигается вниз [w,a,s,d]: ")
+                fish_move = input("Рыба рухаєтся вниз [w,a,s,d]: ")
                 if "w" in fish_move:
                     chance_to_lose_fish = randint(0,100)
                     if chance_to_lose_fish > 90:
                         counter_fish_moves += 1
-                        print("Вы тянули рыбу не достаточно сильно\nРыба отдалилась")
+                        print("Вы тягнули рыбу не достатньо сильно\nРыба віддалилась")
                     else: 
                         counter_fish_moves += 1
                         counter_fish_distance += 1
                         init()
-                        print(Fore.GREEN + "Вы подтянули рыбу к себе" + Style.RESET_ALL)
+                        print(Fore.GREEN + "Вы підтягнули рыбу до себе" + Style.RESET_ALL)
                 else:
                     counter_fish_moves += 1
                     print("Вы двинули удочку не в ту сторону")
             if random_move == 3:
-                fish_move = input("Рыба двигается лево [w,a,s,d]: ")
+                fish_move = input("Рыба рухаєтся ліворуч [w,a,s,d]: ")
                 if "d" in fish_move:
                     chance_to_lose_fish = randint(0,100)
                     if chance_to_lose_fish > 90:
@@ -190,12 +190,12 @@ class Player:
                     else:
                         counter_fish_moves += 1
                         counter_fish_distance += 1
-                        print(Fore.GREEN + "Вы подтянули рыбу к себе" + Style.RESET_ALL)
+                        print(Fore.GREEN + "Вы підтягнули рыбу к себе" + Style.RESET_ALL)
                 else:
                     counter_fish_moves += 1
                     print("Вы двинули удочку не в ту сторону")
             if random_move == 4:
-                fish_move = input("Рыба двигается право [w,a,s,d]: ")
+                fish_move = input("Рыба рухаєтся праворуч [w,a,s,d]: ")
                 if "a" in fish_move:
                     chance_to_lose_fish = randint(0,100)
                     if chance_to_lose_fish > 90:
@@ -204,7 +204,7 @@ class Player:
                     else:
                         counter_fish_moves += 1
                         counter_fish_distance += 1
-                        print(Fore.GREEN + "Вы подтянули рыбу к себе" + Style.RESET_ALL)
+                        print(Fore.GREEN + "Вы підтягнули рыбу к себе" + Style.RESET_ALL)
                 else:
                     counter_fish_moves += 1
                     print("Вы двинули удочку не в ту сторону")
@@ -212,7 +212,7 @@ class Player:
                 self.fishing()
                 break
         if counter_fish_distance != 4:
-            print("вы не смогли словить рыбку(")
+            print("вы не змогли зловити рыбку(")
     #MAIN FISHING CODE
     def fishing(self):
         procent = randint(1,100)
@@ -276,18 +276,20 @@ class Player:
         print(f"Ви увійшли до госпіталю\n Ваше максимальне хп: {self.health_max}\n Ваше поточне хп: {self.health}")
         heal_price = 10
         max_price = 30
-        heal = input(f"Збільшити Максимальне хп(+10) - 'Макс' ({max_price})\n Відновити поточне хп - 'Хіл' ({heal_price})")
+        heal = input(f"Збільшити Максимальне хп(+10) напишіть - 'Макс' ({max_price})\n Відновити поточне хп напишіть - 'Хіл' ({heal_price})")
         heal = heal.title()
         if heal == "Макс":
             if self.balance >= max_price:
                 self.balance -= max_price
                 self.health_max += 10
+                print("Вы збільшили своє хп на 10 ")
             else:
                 print("Невистачає грошей")
         elif heal == "Хіл":
             if self.balance >= heal_price:
                 self.balance -= heal_price
                 self.health = self.health_max
+                print("Вы відловили своє хп до максимума")
             else:
                 print("Невистачає грошей")
         else:
@@ -458,8 +460,8 @@ class Player:
                 # перевірити хп(чи помер гравець чи ворог)
                 if enem.hp <= 0 and en == "enemy":
                     print("\nВи вбили ворога!")
-                    gold = randint(10,21)
-                    xp = randint (50,100)
+                    gold = randint(20,30)
+                    xp = randint (10,25)
                     self.balance += gold
                     self.xp += xp 
                     #self.skill_points()
