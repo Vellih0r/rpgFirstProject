@@ -14,7 +14,7 @@ class Boss():
             atack = randint(1,2)
             if block__counter > 0:
                 print("У вас появилось окно для удара:")
-                block__counter -= 1  
+                block__counter -= 1
                 return 0
             if atack == 1:
                 self.dmg = 15
