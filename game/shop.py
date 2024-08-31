@@ -1,7 +1,7 @@
 from random import randint
 from welcomeclass import decorator
 
-
+#f
 # привітати в магазині та рандомно розрахувати ціну у словник
 @decorator
 def shopfunc(nickname, balance, items, potions):
@@ -16,14 +16,16 @@ def shopfunc(nickname, balance, items, potions):
         pricerand = randint(10,40)
         dict[i] = pricerand
     for i in potions:
-        pricerand = randint(70, 120)
+        pricerand = randint(50, 70)
         dict2[i] = pricerand
+    dict['Вудочка'] = 25
     
     for key, val in dict.items():
         print(f"Товар {key} коштує {val}\n")
 
     for key, val in dict2.items():
         print(f"Зілля {key} коштує {val}\n")
+
 
 def display():
     for key, val in dict.items():
@@ -40,7 +42,7 @@ def buy(character):
 Якщо так, введіть назву предмета\n")
 
     buying = buying.title()
-
+    print(buying)
     if buying == 'Клінок':
         if character.balance < dict['Клінок']: 
             print("Вам не вистачає грошей.")
@@ -48,14 +50,6 @@ def buy(character):
             character.balance -= dict['Клінок']
             print("Ви купували Клінок!")
             character.add_item('Клінок')
-            character.update_stats("new")
-    elif buying == 'Щит':
-        if character.balance <  dict['Щит']:  
-            print("Вам не вистачає грошей.")
-        else:
-            character.balance -=  dict['Щит']
-            print("Ви купували Щит!")
-            character.add_item('Щит')
             character.update_stats("new")
     elif buying == 'Дрібничка':
         if character.balance < dict['Дрібничка']: 
@@ -73,14 +67,14 @@ def buy(character):
             print("Ви купували Вудочку!")
             character.add_item('Вудочка')
             character.update_stats("new")
-    elif buying == "Зілля Здоров'я":
+    elif buying == "Зілля Здоров'Я":
         if character.balance < dict2["Здоров'я"]:
             print("Вам не вистачає грошей.")
         else:
             character.balance -= dict2["Здоров'я"]
             print("Ви купували зілля здоров'я!")
             character.add_potion("Здоров'я")
-    elif buying == "Прокляте Зілля":
+    elif buying == "Зілля Прокляте":
         if character.balance < dict2["Прокляте"]:
             print("Вам не вистачає грошей.")
         else:

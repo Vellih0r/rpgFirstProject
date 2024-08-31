@@ -1,8 +1,8 @@
 from random import randint
-
+#f
 # maks priv2
 class Enemy():
-    def __init__(self, hp = randint(20, 50), dmg = randint(5, 16)):
+    def __init__(self, hp = randint(10, 35), dmg = randint(5, 16)):
 
         #added enemy stats
         self.__hp = hp

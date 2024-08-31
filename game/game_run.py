@@ -1,6 +1,6 @@
 import player
 import welcomeclass
-import shop   #ffff
+import shop   #fffff
 from threading import Thread
 import pyglet
 
@@ -55,15 +55,17 @@ while True:
         elif action == "Інв": Hero.disp_invent()
         elif action == "Рибачити": Hero.fishing_process()
         elif action == "Вихід": pyglet.app.exit(); break
-        elif action == "Ліс": Hero.fight_process('ene')
+        elif action == "Ліс": Hero.fight_process('enemy')
         elif action == "Зілля": Hero.poition_use()
         elif action == "Босс": Hero.fight_process('boss')
         elif action == "Хіл": Hero.hospital()
+        elif action == "Прокачка": Hero.skill_upgrade()
         elif action == "Допомога":
             print('''Список дій:
-| Стати - показати стати
+| Стати - показати статистикі вашого персонажу
 | Магазин - зайти в магазин
 | Інв - показати інвентар
+| Прочка - місце де ви можете прокачати свої статистики
 | Рибачити - піти на рибалку щоб заробити грошей
 | Зілля - використати зілля
 | Босс - кинути виклик боссу                
